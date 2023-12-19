@@ -1,10 +1,10 @@
 def containerName="banking"
 def tag="latest"
 def dockerHubUser="swatig139627"
-def gitURL="https://github.com/SiyaaJhawar/star-agile-banking-finance"
+
 node(){
     stage('code checkout'){
-        checkout change log: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: gitURL]]]
+     checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'githubcred', url: 'https://github.com/SiyaaJhawar/star-agile-banking-finance']])
     }
     stage('Maven Build'){
         sh """  
