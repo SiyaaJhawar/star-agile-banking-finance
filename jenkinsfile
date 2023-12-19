@@ -3,6 +3,10 @@ def tag="latest"
 def dockerHubUser="swatig139627"
 
 node(){
+ def dockerSocketPath = '/var/run/docker.sock'
+    def dockerOptions = "-v ${dockerSocketPath}:${dockerSocketPath} -e DOCKER_HOST=unix://${dockerSocketPath}"
+
+    
      def DockerHome = tool 'docker'
     stage('code checkout'){
      checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'githubcred', url: 'https://github.com/SiyaaJhawar/star-agile-banking-finance']])
