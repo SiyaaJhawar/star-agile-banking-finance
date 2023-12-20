@@ -35,7 +35,7 @@ node(){
             echo "Image push complete"
         }
     stage('Ansible Deployment') {
-        withCredentials([usernamePassword(credentialsId: 'ansible', usernameVariable: 'ansibleUser', passwordVariable: 'ansiblePassword')]) {
+        withCredentials([usernamePassword(credentialsId: 'ansibleId', usernameVariable: 'ansibleUser', passwordVariable: 'ansiblePassword')]) {
             sh """
                 ansible-playbook -i /etc/ansible/ \
                 -e "container_name=$containerName" \
