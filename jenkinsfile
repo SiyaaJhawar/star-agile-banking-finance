@@ -35,7 +35,7 @@ node(){
             echo "Image push complete"
         }
     stage('Ansible Deployment') {
-      ansiblePlaybook credentialsId: 'ansibleid1', installation: 'ansible', inventory: 'https://github.com/SiyaaJhawar/star-agile-banking-finance/blob/master/inventory', playbook: 'https://github.com/SiyaaJhawar/star-agile-banking-finance/blob/master/ansible-playbook.yml', vaultTmpPath: ''
+      ansiblePlaybook credentialsId: 'ansibleid1', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory', playbook: 'ansible-playbook.yml', vaultTmpPath: ''
         }
     }
 }
