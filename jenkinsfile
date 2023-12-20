@@ -34,6 +34,21 @@ node(){
             sh "docker push $dockerUser/$containerName:$tag"
             echo "Image push complete"
         }
+    stage('Ansible Deployment') {
+        withCredentials([usernamePassword(credentialsId: 'ansibleCredentials', usernameVariable: 'ansibleUser', passwordVariable: 'ansiblePassword')]) {
+            sh """
+                ansible-playbook -i \etc\ansible\ \
+                -e "container_name=$containerName" \
+                -e "tag=$tag" \
+                -e "docker_hub_user=$dockerHubUser" \
+                -e "ansible_user=$ansibleUser" \
+                -e "ansible_password=$ansiblePassword" \
+                playbook.yml
+            """
+            echo "Ansible playbook run complete"
+        }
     }
-
 }
+    
+
+
